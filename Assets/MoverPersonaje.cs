@@ -5,15 +5,19 @@ using UnityEngine;
 public class MoverPersonaje : MonoBehaviour
 {
     public float velocidad = 4f;
+    float limiteIzquierdo;
+    float limiteDerecho;
+    float limiteSuperior;
+    float limiteInferior;
 
-
-    // Start is called before the first frame update
     void Start()
     {
-
+        limiteIzquierdo = Camera.main.ScreenToWorldPoint(new Vector3(0, 0, 0)).x;
+        limiteDerecho   = Camera.main.ScreenToWorldPoint(new Vector3(Screen.width, 0, 0)).x;        
+        limiteInferior  = Camera.main.ScreenToWorldPoint(new Vector3(0, 0, 0)).y; ;
+        limiteSuperior  = Camera.main.ScreenToWorldPoint(new Vector3(0, Screen.height, 0)).y;
     }
 
-    // Update is called once per frame
     void Update()
     {
         float horizontal = Input.GetAxis("Horizontal");
@@ -23,8 +27,8 @@ public class MoverPersonaje : MonoBehaviour
         Vector3 direccion = new Vector3(horizontal, vertical, 0);
         Vector3 movimiento = direccion * velocidad * Time.deltaTime;
 
-        Vector3 nuevaPosicion = new Vector3(posicionActual.x + movimiento.x,
-                                            posicionActual.y + movimiento.y,
+        Vector3 nuevaPosicion = new Vector3(Mathf.Clamp(posicionActual.x + movimiento.x, limiteIzquierdo, limiteDerecho),
+                                            Mathf.Clamp(posicionActual.y + movimiento.y, limiteInferior, limiteSuperior),
                                             posicionActual.z);
 
         transform.position = nuevaPosicion;
