@@ -5,16 +5,23 @@ using UnityEngine;
 public class Tablero : MonoBehaviour
 {
 
-    enum Colores
+    public enum Colores
     {
         Rosa,
         Roja
     }
 
-    enum Efectos
+    public enum Efectos
     {
         pasa,
         bloqueado
+    }
+
+    public class Casilla
+    {
+        public Colores color;
+        public Efectos efecto;
+        public Color colorMuestra;
     }
 
     // Start is called before the first frame update
