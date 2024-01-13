@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class MoverPersonaje : MonoBehaviour
 {
+    SpriteRenderer imagenPersonaje;
+    Vector2 tamanyoImagenPersonaje;
     public float velocidad = 4f;
     float limiteIzquierdo;
     float limiteDerecho;
@@ -12,10 +14,12 @@ public class MoverPersonaje : MonoBehaviour
 
     void Start()
     {
-        limiteIzquierdo = Camera.main.ScreenToWorldPoint(new Vector3(0, 0, 0)).x;
-        limiteDerecho   = Camera.main.ScreenToWorldPoint(new Vector3(Screen.width, 0, 0)).x;        
-        limiteInferior  = Camera.main.ScreenToWorldPoint(new Vector3(0, 0, 0)).y; ;
-        limiteSuperior  = Camera.main.ScreenToWorldPoint(new Vector3(0, Screen.height, 0)).y;
+        imagenPersonaje = GetComponent<SpriteRenderer>();
+        tamanyoImagenPersonaje = imagenPersonaje.bounds.size;
+        limiteIzquierdo = Camera.main.ScreenToWorldPoint(new Vector3(0, 0, 0)).x + tamanyoImagenPersonaje.x/2f;
+        limiteDerecho   = Camera.main.ScreenToWorldPoint(new Vector3(Screen.width, 0, 0)).x - tamanyoImagenPersonaje.x / 2f;        
+        limiteInferior  = Camera.main.ScreenToWorldPoint(new Vector3(0, 0, 0)).y + tamanyoImagenPersonaje.y / 2f; 
+        limiteSuperior  = Camera.main.ScreenToWorldPoint(new Vector3(0, Screen.height, 0)).y +- tamanyoImagenPersonaje.y / 2f;
     }
 
     void Update()
