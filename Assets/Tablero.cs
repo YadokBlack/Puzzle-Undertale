@@ -24,15 +24,22 @@ public class Tablero : MonoBehaviour
         public Color colorMuestra;
     }
 
-    // Start is called before the first frame update
+    public GameObject objetoCasilla;
+
     void Start()
+    {
+
+    }
+
+    void Update()
     {
         
     }
 
-    // Update is called once per frame
-    void Update()
+    public void CrearNuevaCasilla(float x, float y, Color color)
     {
-        
+        GameObject nuevaCasilla = Instantiate(objetoCasilla, new Vector3(x, y, 0f), Quaternion.identity);
+        SpriteRenderer spriteRenderer = nuevaCasilla.GetComponent<SpriteRenderer>();
+        spriteRenderer.color = color;
     }
 }
