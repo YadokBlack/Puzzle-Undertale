@@ -17,6 +17,11 @@ public class Tablero : MonoBehaviour
         bloqueado
     }
 
+    public List<Color> coloresDefinidos = new List<Color> {
+        new Color(1.0f, 0.6f, 0.8f),
+        Color.red
+    };
+
     public class Casilla
     {
         public Colores color;
@@ -28,32 +33,30 @@ public class Tablero : MonoBehaviour
     public int ancho = 14;
     public int alto = 8;
 
+    public Casilla[] casillasTablero;
+
     void Start()
     {
-        MostrarTablero();
+        GenerarTablero();
     }
 
-    void Update()
+    public void GenerarTablero()
     {
-        
-    }
-
-    public void MostrarTablero()
-    {
+        int numero;
+        casillasTablero = new Casilla[ancho * alto];
         for (int i = 0; i < ancho; i++)
         {
             for (int j = 0; j < alto; j++)
             {
-                CrearNuevaCasilla( i, j, Color.green);
+                CrearNuevaCasilla(i, j, Color.green);
             }
         }
     }
 
     private int CentrarPosicion(int n, int total)
-    {        
+    {
         return n - (total / 2);
     }
-
 
     public void CrearNuevaCasilla(int x, int y, Color color)
     {
