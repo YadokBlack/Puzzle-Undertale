@@ -80,10 +80,20 @@ public class Tablero : MonoBehaviour
         SpriteRenderer spriteRenderer = nuevaCasilla.GetComponent<SpriteRenderer>();
         spriteRenderer.color = casillasTablero[num].colorMuestra;
 
-        if (casillasTablero[num].efecto == Efectos.pasa)
+        if (CasillaEsPasa(num))
         {
-            BoxCollider2D boxCollider2D = nuevaCasilla.GetComponent<BoxCollider2D>();
-            boxCollider2D.isTrigger = true;
+            DesactivaCollision(nuevaCasilla);
         }
+    }
+
+    private bool CasillaEsPasa(int num)
+    {
+        return casillasTablero[num].efecto == Efectos.pasa;
+    }
+
+    private static void DesactivaCollision(GameObject nuevaCasilla)
+    {
+        BoxCollider2D boxCollider2D = nuevaCasilla.GetComponent<BoxCollider2D>();
+        boxCollider2D.isTrigger = true;
     }
 }
