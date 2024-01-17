@@ -50,7 +50,7 @@ public class Tablero : MonoBehaviour
             {
                 numero = i * alto + j;
                 GeneraCasillaAleatoria(numero);
-                CrearNuevaCasilla(i, j, casillasTablero[numero].colorMuestra);
+                CrearNuevaCasilla(i, j, numero);
             }
         }
     }
@@ -74,10 +74,16 @@ public class Tablero : MonoBehaviour
         return n - (total / 2);
     }
 
-    public void CrearNuevaCasilla(int x, int y, Color color)
+    public void CrearNuevaCasilla(int x, int y, int num)
     {
         GameObject nuevaCasilla = Instantiate(objetoCasilla, new Vector3(CentrarPosicion(x, ancho), CentrarPosicion(y, alto), 0f), Quaternion.identity);
         SpriteRenderer spriteRenderer = nuevaCasilla.GetComponent<SpriteRenderer>();
-        spriteRenderer.color = color;
+        spriteRenderer.color = casillasTablero[num].colorMuestra;
+
+        if (casillasTablero[num].efecto == Efectos.pasa)
+        {
+            BoxCollider2D boxCollider2D = nuevaCasilla.GetComponent<BoxCollider2D>();
+            boxCollider2D.isTrigger = true;
+        }
     }
 }
