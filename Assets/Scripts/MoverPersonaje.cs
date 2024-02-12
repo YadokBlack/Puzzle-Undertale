@@ -6,8 +6,7 @@ public class MoverPersonaje : MonoBehaviour
 {
     public float velocidad = 4f;
 
-    SpriteRenderer imagenPersonaje;
-    Vector2 tamanyoImagenPersonaje;    
+    SpriteRenderer imagenPersonaje;  
     float limiteIzquierdo;
     float limiteDerecho;
     float limiteSuperior;
@@ -15,17 +14,37 @@ public class MoverPersonaje : MonoBehaviour
 
     void Start()
     {
-        CalcularLimitesPantalla();
+        imagenPersonaje = GetComponent<SpriteRenderer>();
+        Vector2 tamanyoImagenPersonaje = imagenPersonaje.bounds.size;
+        CalcularLimitesPersonajePantalla(tamanyoImagenPersonaje);
     }
 
-    private void CalcularLimitesPantalla()
+    private void CalcularLimitesPersonajePantalla(Vector2 sizePlayer)
     {
-        imagenPersonaje = GetComponent<SpriteRenderer>();
-        tamanyoImagenPersonaje = imagenPersonaje.bounds.size;
-        limiteIzquierdo = Camera.main.ScreenToWorldPoint(new Vector3(0, 0, 0)).x + tamanyoImagenPersonaje.x / 2f;
-        limiteDerecho = Camera.main.ScreenToWorldPoint(new Vector3(Screen.width, 0, 0)).x - tamanyoImagenPersonaje.x / 2f;
-        limiteInferior = Camera.main.ScreenToWorldPoint(new Vector3(0, 0, 0)).y + tamanyoImagenPersonaje.y / 2f;
-        limiteSuperior = Camera.main.ScreenToWorldPoint(new Vector3(0, Screen.height, 0)).y + -tamanyoImagenPersonaje.y / 2f;
+        limiteIzquierdo = ObtenerLimiteIzquierdo(sizePlayer);
+        limiteDerecho = ObtenerLimiteDerecho(sizePlayer);
+        limiteInferior = ObtenerLimiteInferior(sizePlayer);
+        limiteSuperior = ObtenerLimiteSuperior(sizePlayer);
+    }
+
+    private float ObtenerLimiteSuperior(Vector2 sizePlayer)
+    {
+        return Camera.main.ScreenToWorldPoint(new Vector3(0, Screen.height, 0)).y - sizePlayer.y / 2f;
+    }
+
+    private float ObtenerLimiteInferior(Vector2 sizePlayer)
+    {
+        return Camera.main.ScreenToWorldPoint(new Vector3(0, 0, 0)).y + sizePlayer.y / 2f;
+    }
+
+    private float ObtenerLimiteDerecho(Vector2 sizePlayer)
+    {
+        return Camera.main.ScreenToWorldPoint(new Vector3(Screen.width, 0, 0)).x - sizePlayer.x / 2f;
+    }
+
+    private float ObtenerLimiteIzquierdo(Vector2 sizePlayer)
+    {
+        return Camera.main.ScreenToWorldPoint(new Vector3(0, 0, 0)).x + sizePlayer.x / 2f;
     }
 
     void Update()
