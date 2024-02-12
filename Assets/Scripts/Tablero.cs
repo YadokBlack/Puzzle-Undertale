@@ -58,13 +58,21 @@ public class Tablero : MonoBehaviour
     private void GeneraCasillaAleatoria(int num)
     {
         int numAleatorio = ObtenerAleatorio();
-        casillasTablero[num] = new Casilla();
-        casillasTablero[num].color = (Colores)numAleatorio;
-        casillasTablero[num].efecto = (Efectos)numAleatorio;
-        casillasTablero[num].colorMuestra = coloresDefinidos[numAleatorio];
+
+        casillasTablero[num] = CrearCasilla(numAleatorio, coloresDefinidos);
     }
 
-    private int ObtenerAleatorio()
+    public static Casilla CrearCasilla(int numAleatorio, List<Color> posiblesMuestras)
+    {
+        var nuevaCasilla = new Casilla();
+
+        nuevaCasilla.color = (Colores)numAleatorio;
+        nuevaCasilla.efecto = (Efectos)numAleatorio;
+        nuevaCasilla.colorMuestra = posiblesMuestras[numAleatorio];
+        return nuevaCasilla;
+    }
+
+    public static int ObtenerAleatorio()
     {
         return Random.Range(0, System.Enum.GetValues(typeof(Colores)).Length);
     }
