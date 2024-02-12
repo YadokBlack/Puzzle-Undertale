@@ -43,16 +43,29 @@ public class Tablero : MonoBehaviour
     public void GenerarTablero()
     {
         int numero;
+        int numeroCamino = Random.Range(0, alto);
         casillasTablero = new Casilla[ancho * alto];
         for (int i = 0; i < ancho; i++)
         {
             for (int j = 0; j < alto; j++)
             {
                 numero = i * alto + j;
-                GeneraCasillaAleatoria(numero);
+                if (numeroCamino != j) 
+                {
+                    GeneraCasillaAleatoria(numero);                    
+                }
+                else
+                {
+                    GeneraCasillaLibre(numero);
+                }
                 CrearNuevaCasilla(i, j, numero);
             }
         }
+    }
+
+    private void GeneraCasillaLibre(int num)
+    {
+        casillasTablero[num] = CrearCasilla(0, coloresDefinidos);
     }
 
     private void GeneraCasillaAleatoria(int num)
