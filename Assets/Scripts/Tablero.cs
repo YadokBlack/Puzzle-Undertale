@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+
 public class Tablero : MonoBehaviour
 {
     public enum Colores
@@ -68,8 +69,8 @@ public class Tablero : MonoBehaviour
         return Random.Range(0, System.Enum.GetValues(typeof(Colores)).Length);
     }
 
-    private int CentrarPosicion(int n, int total)
-    {
+    public static int CentrarPosicion(int n, int total)
+    {        
         return n - (total / 2);
     }
 
