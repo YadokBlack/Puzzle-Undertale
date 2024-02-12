@@ -4,7 +4,6 @@ using UnityEngine;
 
 public class Tablero : MonoBehaviour
 {
-
     public enum Colores
     {
         Rosa,
