@@ -37,19 +37,20 @@ public class MoverPersonaje : MonoBehaviour
     {
         float horizontal = Input.GetAxis("Horizontal");
         float vertical = Input.GetAxis("Vertical");
-        
-        Vector3 direccion = new Vector3(horizontal, vertical, 0);
-        Vector3 movimiento = direccion * velocidad * Time.deltaTime;
-        Vector3 nuevaPosicion = LimitarSalidaPantalla(movimiento);
+        transform.position = CrearNuevaPosicionLimitada(horizontal, vertical);
+    }
 
-        transform.position = nuevaPosicion;
+    Vector3 CrearNuevaPosicionLimitada(float horizontal, float vertical)
+    {
+        Vector3 direccion = new Vector3(horizontal, vertical, 0);
+        return LimitarSalidaPantalla(direccion * velocidad * Time.deltaTime);
     }
 
     Vector3 LimitarSalidaPantalla(Vector3 movimiento)
     {
         Vector3 posicionActual = transform.position;
         return new Vector3(Mathf.Clamp(posicionActual.x + movimiento.x, limiteIzquierdo, limiteDerecho),
-                                            Mathf.Clamp(posicionActual.y + movimiento.y, limiteInferior, limiteSuperior),
-                                            posicionActual.z);
+                           Mathf.Clamp(posicionActual.y + movimiento.y, limiteInferior, limiteSuperior),
+                                       posicionActual.z);
     }
 }
