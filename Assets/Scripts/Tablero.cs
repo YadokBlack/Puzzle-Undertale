@@ -13,7 +13,7 @@ public class Tablero : MonoBehaviour
 
     public enum Efectos
     {
-        pasa,
+        permitido,
         bloqueado
     }
 
@@ -101,15 +101,15 @@ public class Tablero : MonoBehaviour
         SpriteRenderer spriteRenderer = nuevaCasilla.GetComponent<SpriteRenderer>();
         spriteRenderer.color = casillasTablero[num].colorMuestra;
 
-        if (CasillaEsPasa(num))
+        if (CasillaEsTransitable(num))
         {
             DesactivaCollision(nuevaCasilla);
         }
     }
 
-    private bool CasillaEsPasa(int num)
+    private bool CasillaEsTransitable(int num)
     {
-        return casillasTablero[num].efecto == Efectos.pasa;
+        return casillasTablero[num].efecto == Efectos.permitido;
     }
 
     private static void DesactivaCollision(GameObject nuevaCasilla)
