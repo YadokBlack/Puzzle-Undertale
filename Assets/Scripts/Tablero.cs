@@ -37,14 +37,14 @@ public class Tablero : MonoBehaviour
 
     void Start()
     {
-        GenerarTablero();
+        casillasTablero = GenerarTablero();
     }
 
-    public void GenerarTablero()
+    public Casilla[] GenerarTablero()
     {
         int numero;
         int numeroCamino = Random.Range(0, alto);
-        casillasTablero = new Casilla[ancho * alto];
+        Casilla[] tablero = new Casilla[ancho * alto];
         for (int i = 0; i < ancho; i++)
         {
             for (int j = 0; j < alto; j++)
@@ -61,6 +61,7 @@ public class Tablero : MonoBehaviour
                 CrearNuevaCasilla(i, j, numero);
             }
         }
+        return tablero;
     }
 
     private void GeneraCasillaLibre(int num)
