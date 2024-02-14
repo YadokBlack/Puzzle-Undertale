@@ -52,11 +52,11 @@ public class Tablero : MonoBehaviour
                 numero = i * alto + j;
                 if (numeroCamino != j) 
                 {
-                    GeneraCasillaAleatoria(numero);                    
+                    tablero[numero] = GeneraCasillaAleatoria();                    
                 }
                 else
                 {
-                    GeneraCasillaLibre(numero);
+                    tablero[numero] = GeneraCasillaLibre();
                 }
                 CrearNuevaCasilla(i, j, numero);
             }
@@ -64,16 +64,14 @@ public class Tablero : MonoBehaviour
         return tablero;
     }
 
-    private void GeneraCasillaLibre(int num)
+    private Casilla GeneraCasillaLibre()
     {
-        casillasTablero[num] = CrearCasilla(0, coloresDefinidos);
+        return CrearCasilla(0, coloresDefinidos);
     }
 
-    private void GeneraCasillaAleatoria(int num)
+    private Casilla GeneraCasillaAleatoria()
     {
-        int numAleatorio = ObtenerAleatorio();
-
-        casillasTablero[num] = CrearCasilla(numAleatorio, coloresDefinidos);
+        return CrearCasilla(ObtenerAleatorio(), coloresDefinidos);
     }
 
     public static Casilla CrearCasilla(int numAleatorio, List<Color> posiblesMuestras)
