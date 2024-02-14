@@ -5,6 +5,7 @@ using UnityEngine;
 
 public class Tablero : MonoBehaviour
 {
+    const int libre = 0;
     public enum Colores
     {
         Rosa,
@@ -52,26 +53,16 @@ public class Tablero : MonoBehaviour
                 numero = i * alto + j;
                 if (numeroCamino != j) 
                 {
-                    tablero[numero] = GeneraCasillaAleatoria();                    
+                    tablero[numero] = CrearCasilla(ObtenerAleatorio(), coloresDefinidos);
                 }
                 else
                 {
-                    tablero[numero] = GeneraCasillaLibre();
+                    tablero[numero] = CrearCasilla(libre, coloresDefinidos);
                 }
                 CrearNuevaCasilla(i, j, tablero[numero]);
             }
         }
         return tablero;
-    }
-
-    private Casilla GeneraCasillaLibre()
-    {
-        return CrearCasilla(0, coloresDefinidos);
-    }
-
-    private Casilla GeneraCasillaAleatoria()
-    {
-        return CrearCasilla(ObtenerAleatorio(), coloresDefinidos);
     }
 
     public static Casilla CrearCasilla(int numAleatorio, List<Color> posiblesMuestras)
