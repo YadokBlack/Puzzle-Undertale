@@ -39,6 +39,7 @@ public class Tablero : MonoBehaviour
     void Start()
     {
         casillasTablero = GenerarTablero();
+        MuestraTablero(casillasTablero);
     }
 
     public Casilla[] GenerarTablero()
@@ -59,10 +60,32 @@ public class Tablero : MonoBehaviour
                 {
                     tablero[numero] = CrearCasilla(libre, coloresDefinidos);
                 }
-                CrearNuevaCasilla(i, j, tablero[numero]);
             }
         }
         return tablero;
+    }
+
+    public void MuestraTablero(Casilla[] tablero)
+    {
+        int numero;
+        for (int i = 0; i < ancho; i++)
+        {
+            for (int j = 0; j < alto; j++)
+            {
+                numero = i * alto + j;
+                GameObject objetoCasilla = MuestraCasilla(i, j, tablero[numero]);
+
+                if (CasillaEsTransitable(tablero[numero])) DesactivaCollision(objetoCasilla);                
+            }
+        }
+    }
+
+    public GameObject MuestraCasilla(int x, int y, Casilla casilla)
+    {
+        GameObject nuevaCasilla = Instantiate(objetoCasilla, new Vector3(CentrarPosicion(x, ancho), CentrarPosicion(y, alto), 0f), Quaternion.identity);
+        SpriteRenderer spriteRenderer = nuevaCasilla.GetComponent<SpriteRenderer>();
+        spriteRenderer.color = casilla.colorMuestra;
+        return nuevaCasilla;
     }
 
     public static Casilla CrearCasilla(int numAleatorio, List<Color> posiblesMuestras)
@@ -83,18 +106,6 @@ public class Tablero : MonoBehaviour
     public static int CentrarPosicion(int n, int total)
     {        
         return n - (total / 2);
-    }
-
-    public void CrearNuevaCasilla(int x, int y, Casilla casilla)
-    {
-        GameObject nuevaCasilla = Instantiate(objetoCasilla, new Vector3(CentrarPosicion(x, ancho), CentrarPosicion(y, alto), 0f), Quaternion.identity);
-        SpriteRenderer spriteRenderer = nuevaCasilla.GetComponent<SpriteRenderer>();
-        spriteRenderer.color = casilla.colorMuestra;
-
-        if (CasillaEsTransitable(casilla))
-        {
-            DesactivaCollision(nuevaCasilla);
-        }
     }
 
     private bool CasillaEsTransitable(Casilla casilla)
