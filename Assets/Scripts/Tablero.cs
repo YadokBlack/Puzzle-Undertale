@@ -58,7 +58,7 @@ public class Tablero : MonoBehaviour
                 {
                     tablero[numero] = GeneraCasillaLibre();
                 }
-                CrearNuevaCasilla(i, j, numero);
+                CrearNuevaCasilla(i, j, tablero[numero]);
             }
         }
         return tablero;
@@ -94,21 +94,21 @@ public class Tablero : MonoBehaviour
         return n - (total / 2);
     }
 
-    public void CrearNuevaCasilla(int x, int y, int num)
+    public void CrearNuevaCasilla(int x, int y, Casilla casilla)
     {
         GameObject nuevaCasilla = Instantiate(objetoCasilla, new Vector3(CentrarPosicion(x, ancho), CentrarPosicion(y, alto), 0f), Quaternion.identity);
         SpriteRenderer spriteRenderer = nuevaCasilla.GetComponent<SpriteRenderer>();
-        spriteRenderer.color = casillasTablero[num].colorMuestra;
+        spriteRenderer.color = casilla.colorMuestra;
 
-        if (CasillaEsTransitable(num))
+        if (CasillaEsTransitable(casilla))
         {
             DesactivaCollision(nuevaCasilla);
         }
     }
 
-    private bool CasillaEsTransitable(int num)
+    private bool CasillaEsTransitable(Casilla casilla)
     {
-        return casillasTablero[num].efecto == Efectos.permitido;
+        return casilla.efecto == Efectos.permitido;
     }
 
     private static void DesactivaCollision(GameObject nuevaCasilla)
