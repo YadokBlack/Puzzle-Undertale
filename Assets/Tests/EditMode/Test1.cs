@@ -43,4 +43,11 @@ public class Test1
         Casilla casilla = Tablero.CrearCasilla(2, new List<Color>() { Color.blue, Color.red, Color.green });
         Assert.AreEqual(Color.green, casilla.colorMuestra);
     }
+
+    [Test]
+    public void GenerarTablero_dimensiones()
+    {
+        Casilla[] tablero = Tablero.GenerarTablero(2, 3, new List<Color>() { Color.red, Color.yellow });
+        Assert.AreEqual(6, tablero.Length);
+    }
 }

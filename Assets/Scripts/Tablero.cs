@@ -38,11 +38,11 @@ public class Tablero : MonoBehaviour
 
     void Start()
     {
-        casillasTablero = GenerarTablero();
+        casillasTablero = GenerarTablero(ancho, alto, coloresDefinidos);
         MuestraTablero(casillasTablero);
     }
 
-    public Casilla[] GenerarTablero()
+    public static Casilla[] GenerarTablero(int ancho, int alto, List<Color> colores)
     {
         int numero;
         int numeroCamino = Random.Range(0, alto);
@@ -54,11 +54,11 @@ public class Tablero : MonoBehaviour
                 numero = i * alto + j;
                 if (numeroCamino != j) 
                 {
-                    tablero[numero] = CrearCasilla(ObtenerAleatorio(), coloresDefinidos);
+                    tablero[numero] = CrearCasilla(ObtenerAleatorio(), colores);
                 }
                 else
                 {
-                    tablero[numero] = CrearCasilla(libre, coloresDefinidos);
+                    tablero[numero] = CrearCasilla(libre, colores);
                 }
             }
         }
