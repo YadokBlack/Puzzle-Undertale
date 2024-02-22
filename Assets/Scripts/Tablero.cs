@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using static Tablero;
 
 
 public class Tablero : MonoBehaviour
@@ -39,6 +40,7 @@ public class Tablero : MonoBehaviour
     void Start()
     {
         casillasTablero = GenerarTablero(ancho, alto, coloresDefinidos);
+        GeneraCaminoEnTablero(casillasTablero, ancho, alto, coloresDefinidos);
         MuestraTablero(casillasTablero);
     }
 
@@ -52,6 +54,8 @@ public class Tablero : MonoBehaviour
             for (int j = 0; j < alto; j++)
             {
                 numero = i * alto + j;
+                tablero[numero] = CrearCasilla(ObtenerAleatorio(), colores);
+                /*
                 if (numeroCamino != j) 
                 {
                     tablero[numero] = CrearCasilla(ObtenerAleatorio(), colores);
@@ -60,10 +64,35 @@ public class Tablero : MonoBehaviour
                 {
                     tablero[numero] = CrearCasilla(libre, colores);
                 }
+                */
             }
         }
         return tablero;
     }
+
+    public void GeneraCaminoEnTablero(Casilla[] tablero, int ancho, int alto, List<Color> colores)
+    {
+        int numero;
+        int alturaCamino = Random.Range(0,alto);
+        for(int i = 0;i < ancho;i++)
+        {
+            numero = i * alto + alturaCamino;
+            tablero[numero] = CrearCasilla(libre, colores);
+
+            if(i%2 == 1)
+            {
+                int anterior = alturaCamino;
+                alturaCamino = Random.Range(0, alto);
+
+                for ( int j = Mathf.Min(anterior, alturaCamino); j < Mathf.Max(anterior, alturaCamino); j++)
+                {
+                    numero = i * alto + j;
+                    tablero[numero] = CrearCasilla(libre, colores);
+                }
+            }
+        }
+    }
+
 
     public void MuestraTablero(Casilla[] tablero)
     {
