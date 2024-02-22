@@ -55,16 +55,6 @@ public class Tablero : MonoBehaviour
             {
                 numero = i * alto + j;
                 tablero[numero] = CrearCasilla(ObtenerAleatorio(), colores);
-                /*
-                if (numeroCamino != j) 
-                {
-                    tablero[numero] = CrearCasilla(ObtenerAleatorio(), colores);
-                }
-                else
-                {
-                    tablero[numero] = CrearCasilla(libre, colores);
-                }
-                */
             }
         }
         return tablero;
@@ -84,7 +74,7 @@ public class Tablero : MonoBehaviour
                 int anterior = alturaCamino;
                 alturaCamino = Random.Range(0, alto);
 
-                for ( int j = Mathf.Min(anterior, alturaCamino); j < Mathf.Max(anterior, alturaCamino); j++)
+                for ( int j = Mathf.Min(anterior, alturaCamino); j <= Mathf.Max(anterior, alturaCamino); j++)
                 {
                     numero = i * alto + j;
                     tablero[numero] = CrearCasilla(libre, colores);
