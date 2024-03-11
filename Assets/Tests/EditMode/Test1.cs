@@ -77,4 +77,15 @@ public class Test1
         Assert.AreEqual(Efectos.permitido, tablero[2].efecto);
         Assert.AreEqual(Efectos.bloqueado, tablero[3].efecto);
     }
+
+    [Test]
+    public void GenerarCaminoEnTablero_CaminoVertical()
+    {
+        Casilla[] tablero = Tablero.GenerarTablero(2, 2, new List<Color>() { Color.red, Color.yellow });
+        Tablero.GenerarCaminoVertical(tablero, 2, new List<Color>() { Color.red, Color.yellow }, 1, 0, 1);
+        Assert.AreEqual(Efectos.bloqueado, tablero[0].efecto);
+        Assert.AreEqual(Efectos.bloqueado, tablero[1].efecto);
+        Assert.AreEqual(Efectos.permitido, tablero[2].efecto);
+        Assert.AreEqual(Efectos.permitido, tablero[3].efecto);
+    }
 }

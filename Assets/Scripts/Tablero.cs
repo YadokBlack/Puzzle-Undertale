@@ -39,7 +39,6 @@ public class Tablero : MonoBehaviour
     public static Casilla[] GenerarTablero(int ancho, int alto, List<Color> colores)
     {
         int numero;
-        int numeroCamino = Random.Range(0, alto);
         Casilla[] tablero = new Casilla[ancho * alto];
         for (int i = 0; i < ancho; i++)
         {
@@ -69,11 +68,11 @@ public class Tablero : MonoBehaviour
         }
     }
 
-    public static void GenerarCaminoVertical(Casilla[] tablero, int alto, List<Color> colores, int i, int alturaCamino, int anterior)
+    public static void GenerarCaminoVertical(Casilla[] tablero, int alto, List<Color> colores, int columna, int alturaCamino, int alturaAnterior)
     {
-        for (int j = Mathf.Min(anterior, alturaCamino); j <= Mathf.Max(anterior, alturaCamino); j++)
+        for (int j = Mathf.Min(alturaAnterior, alturaCamino); j <= Mathf.Max(alturaAnterior, alturaCamino); j++)
         {
-            var celda = i * alto + j;
+            var celda = columna * alto + j;
             tablero[celda] = CrearCasilla((int)Efectos.permitido, colores);
         }
     }
