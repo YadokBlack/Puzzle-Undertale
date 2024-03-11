@@ -67,15 +67,19 @@ public class Tablero : MonoBehaviour
                 int anterior = alturaCamino;
                 alturaCamino = ObtenerAltura(alto);
 
-                for ( int j = Mathf.Min(anterior, alturaCamino); j <= Mathf.Max(anterior, alturaCamino); j++)
-                {
-                    numero = i * alto + j;
-                    tablero[numero] = CrearCasilla((int)Efectos.permitido, colores);
-                }
+                GenerarCaminoVertical(tablero, alto, colores, alturaCamino, i, anterior);
             }
         }
     }
 
+    public static void GenerarCaminoVertical(Casilla[] tablero, int alto, List<Color> colores, int alturaCamino, int i, int anterior)
+    {
+        for (int j = Mathf.Min(anterior, alturaCamino); j <= Mathf.Max(anterior, alturaCamino); j++)
+        {
+            var celda = i * alto + j;
+            tablero[celda] = CrearCasilla((int)Efectos.permitido, colores);
+        }
+    }
 
     public void MuestraTablero(Casilla[] tablero)
     {
