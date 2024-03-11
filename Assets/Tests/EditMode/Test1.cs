@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using NUnit.Framework;
 using UnityEngine;
 using UnityEngine.TestTools;
@@ -56,5 +57,13 @@ public class Test1
     {
         Casilla[] tablero = Tablero.GenerarTablero(0, 0, new List<Color>() { Color.red, Color.yellow });
         Assert.AreEqual(0, tablero.Length);
+    }
+
+    [Test]
+    public void GenerarCaminoEnTablero_CaminoPermitido()
+    {
+        Casilla[] tablero = Tablero.GenerarTablero(1, 1, new List<Color>() { Color.red, Color.yellow });
+        Tablero.GeneraCaminoEnTablero(tablero, 1, 1, new List<Color>() { Color.red, Color.yellow });
+        Assert.AreEqual(Efectos.permitido, tablero.Single().efecto);
     }
 }
