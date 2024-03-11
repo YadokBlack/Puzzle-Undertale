@@ -63,7 +63,18 @@ public class Test1
     public void GenerarCaminoEnTablero_CaminoPermitido()
     {
         Casilla[] tablero = Tablero.GenerarTablero(1, 1, new List<Color>() { Color.red, Color.yellow });
-        Tablero.GeneraCaminoEnTablero(tablero, 1, 1, new List<Color>() { Color.red, Color.yellow });
+        Tablero.GeneraCaminoEnTablero(tablero, 1, 1, new List<Color>() { Color.red, Color.yellow }, (altura) => 0);
         Assert.AreEqual(Efectos.permitido, tablero.Single().efecto);
+    }
+
+    [Test]
+    public void GenerarCaminoEnTablero_CaminoPermitido2()
+    {
+        Casilla[] tablero = Tablero.GenerarTablero(2, 2, new List<Color>() { Color.red, Color.yellow });
+        Tablero.GeneraCaminoEnTablero(tablero, 2, 2, new List<Color>() { Color.red, Color.yellow }, (altura) => 0);
+        Assert.AreEqual(Efectos.permitido, tablero[0].efecto);
+        Assert.AreEqual(Efectos.bloqueado, tablero[1].efecto);
+        Assert.AreEqual(Efectos.permitido, tablero[2].efecto);
+        Assert.AreEqual(Efectos.bloqueado, tablero[3].efecto);
     }
 }

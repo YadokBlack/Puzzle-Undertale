@@ -32,7 +32,7 @@ public class Tablero : MonoBehaviour
     void Start()
     {
         casillasTablero = GenerarTablero(ancho, alto, coloresDefinidos);
-        GeneraCaminoEnTablero(casillasTablero, ancho, alto, coloresDefinidos);
+        GeneraCaminoEnTablero(casillasTablero, ancho, alto, coloresDefinidos, (altura)=> Random.Range(0, alto));
         MuestraTablero(casillasTablero);
     }
 
@@ -53,10 +53,10 @@ public class Tablero : MonoBehaviour
         return tablero;
     }
 
-    public static void GeneraCaminoEnTablero(Casilla[] tablero, int ancho, int alto, List<Color> colores)
+    public static void GeneraCaminoEnTablero(Casilla[] tablero, int ancho, int alto, List<Color> colores, System.Func<int,int> ObtenerAltura)
     {
         int numero;
-        int alturaCamino = Random.Range(0,alto);
+        int alturaCamino = ObtenerAltura(alto);
         for(int i = 0;i < ancho;i++)
         {
             numero = i * alto + alturaCamino;
@@ -65,7 +65,7 @@ public class Tablero : MonoBehaviour
             if(i%2 == 1)
             {
                 int anterior = alturaCamino;
-                alturaCamino = Random.Range(0, alto);
+                alturaCamino = ObtenerAltura(alto);
 
                 for ( int j = Mathf.Min(anterior, alturaCamino); j <= Mathf.Max(anterior, alturaCamino); j++)
                 {
