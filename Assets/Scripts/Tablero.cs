@@ -64,15 +64,12 @@ public class Tablero : MonoBehaviour
 
             if(i%2 == 1)
             {
-                int anterior = alturaCamino;
-                alturaCamino = ObtenerAltura(alto);
-
-                GenerarCaminoVertical(tablero, alto, colores, alturaCamino, i, anterior);
+                GenerarCaminoVertical(tablero, alto, colores, i, ObtenerAltura(alto), alturaCamino);
             }
         }
     }
 
-    public static void GenerarCaminoVertical(Casilla[] tablero, int alto, List<Color> colores, int alturaCamino, int i, int anterior)
+    public static void GenerarCaminoVertical(Casilla[] tablero, int alto, List<Color> colores, int i, int alturaCamino, int anterior)
     {
         for (int j = Mathf.Min(anterior, alturaCamino); j <= Mathf.Max(anterior, alturaCamino); j++)
         {
