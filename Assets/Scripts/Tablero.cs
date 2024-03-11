@@ -39,7 +39,9 @@ public class GeneradorTablero
 
             if (i % 2 == 1)
             {
-                GenerarCaminoVertical(tablero, alto, colores, i, ObtenerAltura(alto), alturaCamino);
+                int anterior = alturaCamino;
+                alturaCamino = ObtenerAltura(alto);
+                GenerarCaminoVertical(tablero, alto, colores, i, alturaCamino, anterior);
             }
         }
     }
