@@ -27,7 +27,7 @@ public class Test1
     public void ObtenerAleatorio_RangoValores()
     {
         int num = Tablero.ObtenerAleatorio();
-        Assert.IsTrue( num >= 0 && num < System.Enum.GetValues(typeof(Colores)).Length);
+        Assert.IsTrue( num >= 0 && num < System.Enum.GetValues(typeof(Efectos)).Length);
     }
 
     [Test]

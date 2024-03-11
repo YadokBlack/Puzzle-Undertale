@@ -6,13 +6,6 @@ using static Tablero;
 
 public class Tablero : MonoBehaviour
 {
-    const int libre = 0;
-    public enum Colores
-    {
-        Rosa,
-        Roja
-    }
-
     public enum Efectos
     {
         permitido,
@@ -26,7 +19,6 @@ public class Tablero : MonoBehaviour
 
     public class Casilla
     {
-        public Colores color;
         public Efectos efecto;
         public Color colorMuestra;
     }
@@ -54,20 +46,21 @@ public class Tablero : MonoBehaviour
             for (int j = 0; j < alto; j++)
             {
                 numero = i * alto + j;
-                tablero[numero] = CrearCasilla(ObtenerAleatorio(), colores);
+                //  tablero[numero] = CrearCasilla(ObtenerAleatorio(), colores);
+                tablero[numero] = CrearCasilla(1, colores);
             }
         }
         return tablero;
     }
 
-    public void GeneraCaminoEnTablero(Casilla[] tablero, int ancho, int alto, List<Color> colores)
+    public static void GeneraCaminoEnTablero(Casilla[] tablero, int ancho, int alto, List<Color> colores)
     {
         int numero;
         int alturaCamino = Random.Range(0,alto);
         for(int i = 0;i < ancho;i++)
         {
             numero = i * alto + alturaCamino;
-            tablero[numero] = CrearCasilla(libre, colores);
+            tablero[numero] = CrearCasilla((int)Efectos.permitido, colores);
 
             if(i%2 == 1)
             {
@@ -77,7 +70,7 @@ public class Tablero : MonoBehaviour
                 for ( int j = Mathf.Min(anterior, alturaCamino); j <= Mathf.Max(anterior, alturaCamino); j++)
                 {
                     numero = i * alto + j;
-                    tablero[numero] = CrearCasilla(libre, colores);
+                    tablero[numero] = CrearCasilla((int)Efectos.permitido, colores);
                 }
             }
         }
@@ -107,19 +100,18 @@ public class Tablero : MonoBehaviour
         return nuevaCasilla;
     }
 
-    public static Casilla CrearCasilla(int numAleatorio, List<Color> posiblesMuestras)
+    public static Casilla CrearCasilla(int tipoCasilla, List<Color> posiblesMuestras)
     {
         var nuevaCasilla = new Casilla();
 
-        nuevaCasilla.color = (Colores)numAleatorio;
-        nuevaCasilla.efecto = (Efectos)numAleatorio;
-        nuevaCasilla.colorMuestra = posiblesMuestras[numAleatorio];
+        nuevaCasilla.efecto = (Efectos)tipoCasilla;
+        nuevaCasilla.colorMuestra = posiblesMuestras[tipoCasilla];
         return nuevaCasilla;
     }
 
     public static int ObtenerAleatorio()
     {
-        return Random.Range(0, System.Enum.GetValues(typeof(Colores)).Length);
+        return Random.Range(0, System.Enum.GetValues(typeof(Efectos)).Length);
     }
 
     public static int CentrarPosicion(int n, int total)
