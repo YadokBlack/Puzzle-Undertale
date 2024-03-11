@@ -3,6 +3,76 @@ using System.Collections.Generic;
 using UnityEngine;
 using static Tablero;
 
+public class GeneradorTablero
+{
+    public Casilla[] Generar(int ancho, int alto, List<Color> colores, System.Func<int, int> ObtenerAltura)
+    {
+        var casillasTablero = GenerarTablero(ancho, alto, colores);
+        GeneraCaminoEnTablero(casillasTablero, ancho, alto, colores, ObtenerAltura);
+        return casillasTablero;
+    }
+
+    public Casilla[] GenerarTablero(int ancho, int alto, List<Color> colores)
+    {
+        int numero;
+        Casilla[] tablero = new Casilla[ancho * alto];
+        for (int i = 0; i < ancho; i++)
+        {
+            for (int j = 0; j < alto; j++)
+            {
+                numero = i * alto + j;
+                //  tablero[numero] = CrearCasilla(ObtenerAleatorio(), colores);
+                tablero[numero] = CrearCasilla(1, colores);
+            }
+        }
+        return tablero;
+    }
+
+    public void GeneraCaminoEnTablero(Casilla[] tablero, int ancho, int alto, List<Color> colores, System.Func<int, int> ObtenerAltura)
+    {
+        int numero;
+        int alturaCamino = ObtenerAltura(alto);
+        for (int i = 0; i < ancho; i++)
+        {
+            numero = i * alto + alturaCamino;
+            tablero[numero] = CrearCasilla((int)Efectos.permitido, colores);
+
+            if (i % 2 == 1)
+            {
+                GenerarCaminoVertical(tablero, alto, colores, i, ObtenerAltura(alto), alturaCamino);
+            }
+        }
+    }
+
+    public void GenerarCaminoVertical(Casilla[] tablero, int alto, List<Color> colores, int columna, int alturaCamino, int alturaAnterior)
+    {
+        for (int j = Mathf.Min(alturaAnterior, alturaCamino); j <= Mathf.Max(alturaAnterior, alturaCamino); j++)
+        {
+            var celda = columna * alto + j;
+            tablero[celda] = CrearCasilla((int)Efectos.permitido, colores);
+        }
+    }
+
+    public Casilla CrearCasilla(int tipoCasilla, List<Color> posiblesMuestras)
+    {
+        var nuevaCasilla = new Casilla();
+
+        nuevaCasilla.efecto = (Efectos)tipoCasilla;
+        nuevaCasilla.colorMuestra = posiblesMuestras[tipoCasilla];
+        return nuevaCasilla;
+    }
+
+    public int ObtenerAleatorio()
+    {
+        return Random.Range(0, System.Enum.GetValues(typeof(Efectos)).Length);
+    }
+
+    public int CentrarPosicion(int n, int total)
+    {
+        return n - (total / 2);
+    }
+}
+
 
 public class Tablero : MonoBehaviour
 {
@@ -31,25 +101,7 @@ public class Tablero : MonoBehaviour
 
     void Start()
     {
-        casillasTablero = GenerarTablero(ancho, alto, coloresDefinidos);
-        GeneraCaminoEnTablero(casillasTablero, ancho, alto, coloresDefinidos, (altura)=> Random.Range(0, alto));
-        MuestraTablero(casillasTablero);
-    }
-
-    public static Casilla[] GenerarTablero(int ancho, int alto, List<Color> colores)
-    {
-        int numero;
-        Casilla[] tablero = new Casilla[ancho * alto];
-        for (int i = 0; i < ancho; i++)
-        {
-            for (int j = 0; j < alto; j++)
-            {
-                numero = i * alto + j;
-                //  tablero[numero] = CrearCasilla(ObtenerAleatorio(), colores);
-                tablero[numero] = CrearCasilla(1, colores);
-            }
-        }
-        return tablero;
+        MuestraTablero(new GeneradorTablero().Generar(ancho, alto, coloresDefinidos, (altura) => Random.Range(0, alto)));
     }
 
     public static void GeneraCaminoEnTablero(Casilla[] tablero, int ancho, int alto, List<Color> colores, System.Func<int,int> ObtenerAltura)
