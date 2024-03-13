@@ -106,15 +106,6 @@ public class Tablero : MonoBehaviour
         MuestraTablero(new GeneradorTablero().Generar(ancho, alto, coloresDefinidos, (altura) => Random.Range(0, alto)));
     }
 
-    public static void GenerarCaminoVertical(Casilla[] tablero, int alto, List<Color> colores, int columna, int alturaCamino, int alturaAnterior)
-    {
-        for (int j = Mathf.Min(alturaAnterior, alturaCamino); j <= Mathf.Max(alturaAnterior, alturaCamino); j++)
-        {
-            var celda = columna * alto + j;
-            tablero[celda] = CrearCasilla((int)Efectos.permitido, colores);
-        }
-    }
-
     public void MuestraTablero(Casilla[] tablero)
     {
         int numero;
