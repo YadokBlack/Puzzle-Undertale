@@ -68,11 +68,6 @@ public class GeneradorTablero
     {
         return Random.Range(0, System.Enum.GetValues(typeof(Efectos)).Length);
     }
-
-    public int CentrarPosicion(int n, int total)
-    {
-        return n - (total / 2);
-    }
 }
 
 
