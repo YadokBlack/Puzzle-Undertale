@@ -83,8 +83,9 @@ public class Test1
     [Test]
     public void GenerarCaminoEnTablero_CaminoVertical()
     {
-        Casilla[] tablero = new GeneradorTablero().GenerarTablero(2, 2, new List<Color>() { Color.red, Color.yellow });
-        Tablero.GenerarCaminoVertical(tablero, 2, new List<Color>() { Color.red, Color.yellow }, 1, 0, 1);
+        GeneradorTablero generador = new GeneradorTablero();
+        Casilla[] tablero = generador.GenerarTablero(2, 2, new List<Color>() { Color.red, Color.yellow });
+        generador.GenerarCaminoVertical(tablero, 2, new List<Color>() { Color.red, Color.yellow }, 1, 0, 1);
         Assert.AreEqual(Efectos.bloqueado, tablero[0].efecto);
         Assert.AreEqual(Efectos.bloqueado, tablero[1].efecto);
         Assert.AreEqual(Efectos.permitido, tablero[2].efecto);
@@ -94,8 +95,9 @@ public class Test1
     [Test]
     public void GenerarCaminoEnTablero_CaminoVertical2()
     {
-        Casilla[] tablero = new GeneradorTablero().GenerarTablero(2, 2, new List<Color>() { Color.red, Color.yellow });
-        Tablero.GenerarCaminoVertical(tablero, 2, new List<Color>() { Color.red, Color.yellow }, 1, 1, 1);
+        GeneradorTablero generador = new GeneradorTablero();
+        Casilla[] tablero = generador.GenerarTablero(2, 2, new List<Color>() { Color.red, Color.yellow });
+        generador.GenerarCaminoVertical(tablero, 2, new List<Color>() { Color.red, Color.yellow }, 1, 1, 1);
         Assert.AreEqual(Efectos.bloqueado, tablero[0].efecto);
         Assert.AreEqual(Efectos.bloqueado, tablero[1].efecto);
         Assert.AreEqual(Efectos.bloqueado, tablero[2].efecto);
@@ -105,8 +107,9 @@ public class Test1
     [Test]
     public void GenerarCaminoEnTablero_CaminoVertical3()
     {
-        Casilla[] tablero = new GeneradorTablero().GenerarTablero(2, 2, new List<Color>() { Color.red, Color.yellow });
-        Tablero.GenerarCaminoVertical(tablero, 2, new List<Color>() { Color.red, Color.yellow }, 0, 0, 1);
+        GeneradorTablero generador = new GeneradorTablero();
+        Casilla[] tablero = generador.GenerarTablero(2, 2, new List<Color>() { Color.red, Color.yellow });
+        generador.GenerarCaminoVertical(tablero, 2, new List<Color>() { Color.red, Color.yellow }, 0, 0, 1);
         Assert.AreEqual(Efectos.permitido, tablero[0].efecto);
         Assert.AreEqual(Efectos.permitido, tablero[1].efecto);
         Assert.AreEqual(Efectos.bloqueado, tablero[2].efecto);
