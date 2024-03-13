@@ -129,11 +129,6 @@ public class Tablero : MonoBehaviour
         return nuevaCasilla;
     }
 
-    public static int ObtenerAleatorio()
-    {
-        return Random.Range(0, System.Enum.GetValues(typeof(Efectos)).Length);
-    }
-
     public static int CentrarPosicion(int n, int total)
     {        
         return n - (total / 2);
