@@ -129,15 +129,6 @@ public class Tablero : MonoBehaviour
         return nuevaCasilla;
     }
 
-    public static Casilla CrearCasilla(int tipoCasilla, List<Color> posiblesMuestras)
-    {
-        var nuevaCasilla = new Casilla();
-
-        nuevaCasilla.efecto = (Efectos)tipoCasilla;
-        nuevaCasilla.colorMuestra = posiblesMuestras[tipoCasilla];
-        return nuevaCasilla;
-    }
-
     public static int ObtenerAleatorio()
     {
         return Random.Range(0, System.Enum.GetValues(typeof(Efectos)).Length);
