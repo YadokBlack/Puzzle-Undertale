@@ -34,14 +34,14 @@ public class Test1
     [Test]
     public void CrearCasilla_AsignarColorMuestra()
     {
-        Casilla casilla = Tablero.CrearCasilla(0, new List<Color>() { Color.blue });
+        Casilla casilla = new GeneradorTablero().CrearCasilla(0, new List<Color>() { Color.blue });
         Assert.AreEqual(Color.blue, casilla.colorMuestra);
     }
 
     [Test]
     public void CrearCasilla_ColorMuestra()
     {
-        Casilla casilla = Tablero.CrearCasilla(2, new List<Color>() { Color.blue, Color.red, Color.green });
+        Casilla casilla = new GeneradorTablero().CrearCasilla(2, new List<Color>() { Color.blue, Color.red, Color.green });
         Assert.AreEqual(Color.green, casilla.colorMuestra);
     }
 
