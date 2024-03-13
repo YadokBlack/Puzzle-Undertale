@@ -248,8 +248,8 @@ MonoBehaviour:
   - {r: 1, g: 0.6, b: 0.8000001, a: 1}
   - {r: 0.990566, g: 0.07881496, b: 0.042052314, a: 1}
   objetoCasilla: {fileID: 3425785366875744932, guid: 36721dd12e49a904f99e50d2b9f163d5, type: 3}
-  ancho: 2
-  alto: 2
+  ancho: 15
+  alto: 8
 --- !u!4 &1430828395
 Transform:
   m_ObjectHideFlags: 0

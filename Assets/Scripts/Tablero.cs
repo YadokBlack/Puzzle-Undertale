@@ -178,7 +178,7 @@ public class Tablero : MonoBehaviour
         return casilla.efecto == Efectos.permitido;
     }
 
-    private static void DesactivaCollision(GameObject nuevaCasilla)
+    private void DesactivaCollision(GameObject nuevaCasilla)
     {
         BoxCollider2D boxCollider2D = nuevaCasilla.GetComponent<BoxCollider2D>();
         boxCollider2D.isTrigger = true;
